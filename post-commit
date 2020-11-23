@@ -1,21 +1,22 @@
 #!/bin/bash
 #
-# post-commit-excel: have git handle xlsx files by deflating them and storing
-#                    the XML in the repository, not the zip file. 
+# post-commit-excel: have git handle pbit files by deflating them and storing
+#                    the files in the repository, not the zip file. 
 #
-#                    companion to pre-commit-excel
+#                    companion to pre-commit-pbit
 #                    currently identical to post-checkout
 
 # -- config -- #
-TMP_PREFIX='.~' # prefix XML directory--should NOT conflict with 
+TMP_PREFIX='.~' # prefix unzipped directory--should NOT conflict with 
                    # anything in your repo
 
 # -- end config -- #
 
 echo
-echo "=== Post-commit XLSX processing ===="
+echo "=== Post-commit PBIT processing ===="
 
-repack_xlsx () {
+# TODO might fail if "zip" command is not installed
+repack_pbit () {
     # re-zip the XML directory 
     rm "$1"
     cd "${TMP_PREFIX}$1"
@@ -27,13 +28,14 @@ repack_xlsx () {
 shopt -s globstar
 
 # repack all the zipfiles
+# TODO might make unpredictable results if no PBIT was commited
 start_dir="$(pwd)"
-for i in **/${TMP_PREFIX}*.xlsx; do 
+for i in **/${TMP_PREFIX}*.pbit; do 
     dir=$(dirname "$i")
     base=$(basename "$i")
     file=${base:${#TMP_PREFIX}}
     cd "$dir"
-    repack_xlsx "$file"
+    repack_pbit "$file"
     cd "$start_dir"
 done
 
