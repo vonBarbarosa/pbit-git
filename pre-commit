@@ -40,15 +40,14 @@ reformat_xmls () {
     find "$1" -name "*.xml" -type f -exec xmllint --output '{}' --format '{}' \;
 }
 
-# WIP
+
 # TODO jq might fail if jq is not installed
-#
-# reformat_jsons () {
-#     # reformat the json file to many lines
-#     for i in $(find "$1" -name "*.json" -type f); do
-#         jq . "$i" > "$i.tmp" && mv "$i.tmp" "$i"
-#     done
-# }
+reformat_jsons () {
+    # reformat the json file to many lines
+    for i in $(find "$1" -name "*.json" -type f); do
+        jq . "$i" > "$i.tmp" && mv "$i.tmp" "$i"
+    done
+}
 
 # TODO check if PBIT is in use
 
@@ -63,7 +62,7 @@ for i in $(git diff --name-only --cached -- *.pbit); do
     echo -n "Commit placeholder file: "
     file "$file"
     reformat_xmls "${TMP_PREFIX}$file"
-    # reformat_jsons "${TMP_PREFIX}$file"
+    reformat_jsons "${TMP_PREFIX}$file"
     cd -
 
     # stage the PBIT files and the placeholder

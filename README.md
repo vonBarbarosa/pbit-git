@@ -23,3 +23,4 @@ When you have .pbit files in your repo, you won't be able to checkout other bran
 I use Cygwin and the GNU tools that go with that. With Git Extensions or MinGW you may need some other basic commands, like dirname and basename. In addition:
 * `zip` and `unzip`
 * `libxml2-utils` for xmllint
+* `jq` for json formatting
