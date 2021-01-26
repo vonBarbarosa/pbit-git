@@ -16,8 +16,13 @@ pbit-git provides hooks to convert .pbit files into their text and smaller binar
 When you have .pbit files in your repo, you won't be able to checkout other branches or commits because the post-checkout hook always leaves the .pbit files in a "modified" state. This protects you against accidentally losing saved but not committed work in Power BI templates. Before `checkout`, use `git stash` to get to a clean state by hiding away your Power BI template files.
 
 ## Installation and Use
-1. Place pre-commit and post-commit in the .git/hooks/ directory of your repository. 
-2. Make sure they are executable (e.g., `chmod 755 *-commit`)
+1. Run `install-git-hooks.sh` to link git hooks and check if all commands are installed:
+
+    ```
+    ./install-git-hooks.sh
+    ```
+
+1. Make sure the scripts are executable (e.g., `chmod 755 git/hooks/*-commit`)
 
 ## Dependencies
 I use Cygwin and the GNU tools that go with that. With Git Extensions or MinGW you may need some other basic commands, like dirname and basename. In addition:
