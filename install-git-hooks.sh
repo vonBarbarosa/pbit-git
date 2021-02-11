@@ -22,7 +22,7 @@ command_exists () {
 }
 
 all_commands_installed=true
-install_command="  sudo install "
+install_command="  sudo apt install "
 
 if ! (command_exists unzip && command_exists zip) ; then
   install_command+="zip unzip "
